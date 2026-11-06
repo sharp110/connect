@@ -1,0 +1,16 @@
+{
+  "name": "screenshare-admin",
+  "version": "2.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "selfsigned": "^2.4.1",
+    "ws": "^8.17.0"
+  }
+}

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Metrics — Sessions</title>
+    <link rel="stylesheet" href="/tokens.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem("adminTheme") === "light")
+            document.documentElement.classList.add("light");
+        } catch (e) {}
+      })();
+    </script>
+    <style>
+      .metrics-main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: var(--s-5);
+      }
+      .metrics-title {
+        font-size: var(--t-24);
+        font-weight: 600;
+        margin-bottom: var(--s-1);
+        letter-spacing: -0.02em;
+      }
+      .metrics-sub {
+        color: var(--c-text-2);
+        margin-bottom: var(--s-5);
+        font-size: var(--t-13);
+      }
+      .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: var(--s-4);
+        margin-bottom: var(--s-6);
+      }
+      .stat {
+        background: var(--c-surface);
+        border: 1px solid var(--c-border);
+        border-radius: var(--r-lg);
+        padding: var(--s-4);
+      }
+      .stat-label {
+        font-size: var(--t-12);
+        color: var(--c-text-2);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: var(--s-2);
+      }
+      .stat-value {
+        font-size: var(--t-24);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        font-variant-numeric: tabular-nums;
+      }
+      .stat-hint {
+        font-size: var(--t-12);
+        color: var(--c-text-3);
+        margin-top: var(--s-1);
+      }
+      .events-title {
+        font-size: var(--t-18);
+        font-weight: 600;
+        margin-bottom: var(--s-3);
+      }
+      .events-list {
+        background: var(--c-surface);
+        border: 1px solid var(--c-border);
+        border-radius: var(--r-lg);
+        padding: var(--s-3);
+      }
+      .event {
+        display: flex;
+        align-items: center;
+        gap: var(--s-3);
+        padding: var(--s-2);
+        font-size: var(--t-12);
+        font-family: var(--font-mono);
+        border-bottom: 1px solid var(--c-border);
+      }
+      .event:last-child {
+        border-bottom: none;
+      }
+      .event-time {
+        color: var(--c-text-3);
+        flex-shrink: 0;
+      }
+      .event-type {
+        padding: 2px 8px;
+        border-radius: var(--r-sm);
+        font-size: var(--t-12);
+        font-weight: 500;
+        font-family: var(--font-ui);
+      }
+      .event-type.join {
+        background: rgba(34, 197, 94, 0.15);
+        color: var(--c-success);
+      }
+      .event-type.leave {
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--c-danger);
+      }
+      .event-type.delete {
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--c-danger);
+      }
+      .event-type.message {
+        background: rgba(59, 130, 246, 0.15);
+        color: var(--c-accent);
+      }
+      .event-id {
+        color: var(--c-text-2);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-brand">
+        <div class="brand-icon" data-icon="chart"></div>
+        <span class="brand-name">Metrics</span>
+      </div>
+      <div></div>
+      <div class="topbar-actions">
+        <a href="/admin.html" class="btn btn-secondary">Back to sessions</a>
+      </div>
+    </header>
+
+    <main class="metrics-main">
+      <h1 class="metrics-title">Today</h1>
+      <p class="metrics-sub" id="metrics-sub">Loading…</p>
+
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-label">Unique visitors</div>
+          <div class="stat-value" id="m-unique">—</div>
+          <div class="stat-hint">joined today</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Joins</div>
+          <div class="stat-value" id="m-joins">—</div>
+          <div class="stat-hint" id="m-joins-hint">—</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Live now</div>
+          <div class="stat-value" id="m-live">—</div>
+          <div class="stat-hint" id="m-peak">peak today: —</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Messages sent</div>
+          <div class="stat-value" id="m-messages">—</div>
+          <div class="stat-hint">to visitors</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Avg session</div>
+          <div class="stat-value" id="m-avg">—</div>
+          <div class="stat-hint" id="m-completed">— completed today</div>
+        </div>
+      </div>
+
+      <h2 class="events-title">Recent activity</h2>
+      <div class="events-list" id="events-list">
+        <div class="event"><span class="event-id">No events yet.</span></div>
+      </div>
+    </main>
+
+    <script src="/icons.js"></script>
+    <script src="/metrics.js"></script>
+  </body>
+</html>

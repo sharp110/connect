@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sessions</title>
+    <link rel="stylesheet" href="/tokens.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem("adminTheme") === "light")
+            document.documentElement.classList.add("light");
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <!-- LOGIN -->
+    <section id="login-view" class="login-screen">
+      <div class="login-card">
+        <div class="login-brand">
+          <div class="login-logo" data-icon="search"></div>
+        </div>
+        <h1 class="login-title">Sign in to Sessions</h1>
+        <p class="login-sub">Enter your admin password.</p>
+        <form id="login-form" autocomplete="off" novalidate>
+          <label class="field">
+            <span class="field-label">Password</span>
+            <input
+              id="pw"
+              type="password"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              required
+            />
+          </label>
+          <button type="submit" class="btn btn-primary" id="login-btn">
+            Sign in
+          </button>
+          <div class="form-error" id="login-err" role="alert"></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <div id="dash-view" class="app" hidden>
+      <header class="topbar">
+        <div class="topbar-brand">
+          <div class="brand-icon" data-icon="search"></div>
+          <span class="brand-name">Sessions</span>
+        </div>
+
+        <div class="topbar-search">
+          <span class="search-icon" data-icon="search"></span>
+          <input
+            id="search-input"
+            type="search"
+            placeholder="Search by id or fingerprint"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="topbar-actions">
+          <div class="segmented" role="tablist" id="status-filters">
+            <button class="seg" data-filter="all" aria-selected="true">
+              All
+            </button>
+            <button class="seg" data-filter="live" aria-selected="false">
+              Live
+            </button>
+            <button class="seg" data-filter="offline" aria-selected="false">
+              Offline
+            </button>
+          </div>
+          <a
+            href="/metrics.html"
+            class="icon-btn"
+            title="Metrics"
+            target="_blank"
+            rel="noopener"
+            data-icon="chart"
+          ></a>
+          <button
+            id="notify-btn"
+            class="icon-btn"
+            title="Enable notifications"
+            data-icon="bell"
+            hidden
+          ></button>
+          <button
+            id="theme-btn"
+            class="icon-btn"
+            title="Toggle theme"
+            data-icon="sun"
+          ></button>
+          <button
+            id="logout-btn"
+            class="icon-btn"
+            title="Sign out"
+            data-icon="logout"
+          ></button>
+        </div>
+      </header>
+
+      <div class="statusbar">
+        <span class="status-dot" id="status-dot"></span>
+        <span class="status-text" id="status-text">connecting…</span>
+        <span class="status-sep">·</span>
+        <span class="status-meta" id="status-meta">0 live, 0 offline</span>
+      </div>
+
+      <main class="main">
+        <div class="grid" id="grid"></div>
+
+        <div class="empty-state" id="empty">
+          <div class="empty-icon" data-icon="search"></div>
+          <h2 class="empty-title">No sessions yet</h2>
+          <p class="empty-sub">
+            Share the visitor link to start receiving screen shares.
+          </p>
+          <button class="btn btn-secondary" id="copy-link-btn">
+            Copy visitor link
+          </button>
+        </div>
+      </main>
+    </div>
+
+    <script src="/icons.js"></script>
+    <script src="/admin.js"></script>
+  </body>
+</html>
